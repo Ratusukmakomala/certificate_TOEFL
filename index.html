@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Certificate Verification</title>
+  <meta name="description" content="Halaman verifikasi sertifikat online.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="brand">CERTIFICATE VERIFICATION</div>
+      <h1>Sertifikat Terverifikasi</h1>
+      <p class="muted">Gunakan nomor sertifikat untuk memeriksa dokumen yang diterbitkan.</p>
+    </section>
+
+    <section class="card">
+      <div class="status"><span class="dot"></span> Certificate record found</div>
+      <dl class="details">
+        <div><dt>Nama</dt><dd>Ratu Sukmakomala</dd></div>
+        <div><dt>Program / Tes</dt><dd>TOEFL Prediction Test</dd></div>
+        <div><dt>Nomor Sertifikat</dt><dd>251092753</dd></div>
+        <div><dt>Tanggal Tes</dt><dd>October 5, 2025</dd></div>
+        <div><dt>Berlaku Sampai</dt><dd>October 5, 2027</dd></div>
+        <div><dt>Penerbit</dt><dd>English Domestic</dd></div>
+      </dl>
+
+      <div class="scores">
+        <div><span>Listening Comprehension</span><strong>48</strong></div>
+        <div><span>Structure &amp; Written Expression</span><strong>65</strong></div>
+        <div><span>Reading Comprehension</span><strong>61</strong></div>
+        <div class="total"><span>Total</span><strong>580</strong></div>
+      </div>
+
+      <div class="actions">
+        <a class="button primary" href="certificates/251092753.pdf" target="_blank" rel="noopener">Lihat Sertifikat PDF</a>
+        <button class="button secondary" onclick="copyLink()">Salin Link Verifikasi</button>
+      </div>
+      <p id="copied" class="copied" aria-live="polite"></p>
+    </section>
+
+    <footer>
+      <p>Nomor sertifikat: <strong>251092753</strong></p>
+      <p class="muted">Halaman ini adalah halaman verifikasi online untuk dokumen sertifikat yang disimpan di repository ini.</p>
+    </footer>
+  </main>
+  <script>
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        document.getElementById('copied').textContent = 'Link berhasil disalin.';
+      }).catch(() => {
+        document.getElementById('copied').textContent = window.location.href;
+      });
+    }
+  </script>
+</body>
+</html>
