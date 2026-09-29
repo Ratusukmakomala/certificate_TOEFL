@@ -4,55 +4,235 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Certificate Verification</title>
-  <meta name="description" content="Halaman verifikasi sertifikat online.">
+  <meta name="description" content="Verifikasi sertifikat online.">
   <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body>
   <main class="wrap">
+
     <section class="hero">
       <div class="brand">CERTIFICATE VERIFICATION</div>
-      <h1>Sertifikat Terverifikasi</h1>
-      <p class="muted">Gunakan nomor sertifikat untuk memeriksa dokumen yang diterbitkan.</p>
+
+      <h1>Verifikasi Sertifikat</h1>
+
+      <p class="muted">
+        Masukkan nomor sertifikat untuk memeriksa dokumen yang diterbitkan.
+      </p>
     </section>
 
     <section class="card">
-      <div class="status"><span class="dot"></span> Certificate record found</div>
-      <dl class="details">
-        <div><dt>Nama</dt><dd>Ratu Sukmakomala</dd></div>
-        <div><dt>Program / Tes</dt><dd>TOEFL Prediction Test</dd></div>
-        <div><dt>Nomor Sertifikat</dt><dd>251092753</dd></div>
-        <div><dt>Tanggal Tes</dt><dd>October 5, 2025</dd></div>
-        <div><dt>Berlaku Sampai</dt><dd>October 5, 2027</dd></div>
-        <div><dt>Penerbit</dt><dd>English Domestic</dd></div>
-      </dl>
 
-      <div class="scores">
-        <div><span>Listening Comprehension</span><strong>48</strong></div>
-        <div><span>Structure &amp; Written Expression</span><strong>65</strong></div>
-        <div><span>Reading Comprehension</span><strong>61</strong></div>
-        <div class="total"><span>Total</span><strong>580</strong></div>
-      </div>
+      <label for="certificateNumber">
+        Nomor Sertifikat
+      </label>
 
-      <div class="actions">
-        <a class="button primary" href="certificates/251092753.pdf" target="_blank" rel="noopener">Lihat Sertifikat PDF</a>
-        <button class="button secondary" onclick="copyLink()">Salin Link Verifikasi</button>
-      </div>
-      <p id="copied" class="copied" aria-live="polite"></p>
+      <input
+        id="certificateNumber"
+        type="text"
+        placeholder="Contoh: 251092753"
+        autocomplete="off"
+      >
+
+      <button
+        class="button primary"
+        onclick="verifyCertificate()"
+      >
+        Verifikasi Sertifikat
+      </button>
+
+      <div id="result"></div>
+
     </section>
 
     <footer>
-      <p>Nomor sertifikat: <strong>251092753</strong></p>
-      <p class="muted">Halaman ini adalah halaman verifikasi online untuk dokumen sertifikat yang disimpan di repository ini.</p>
+      <p class="muted">
+        Halaman verifikasi online untuk sertifikat yang diterbitkan
+        melalui sistem ini.
+      </p>
     </footer>
+
   </main>
+
   <script>
-    function copyLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        document.getElementById('copied').textContent = 'Link berhasil disalin.';
-      }).catch(() => {
-        document.getElementById('copied').textContent = window.location.href;
-      });
+
+    const certificates = {
+
+      "251092753": {
+        name: "Ratu Sukmakomala",
+        program: "TOEFL Prediction Test",
+        certificateNumber: "251092753",
+        testDate: "October 5, 2025",
+        validUntil: "October 5, 2027",
+        issuer: "English Domestic",
+        listening: "48",
+        structure: "65",
+        reading: "61",
+        total: "580",
+        pdf: "certificates/251092753.pdf"
+      }
+
+    };
+
+
+    function verifyCertificate() {
+
+      const number =
+        document
+          .getElementById("certificateNumber")
+          .value
+          .trim();
+
+      const result =
+        document.getElementById("result");
+
+
+      if (!number) {
+
+        result.innerHTML = `
+          <div class="error">
+            Silakan masukkan nomor sertifikat.
+          </div>
+        `;
+
+        return;
+      }
+
+
+      const certificate =
+        certificates[number];
+
+
+      if (!certificate) {
+
+        result.innerHTML = `
+          <div class="error">
+            <strong>Sertifikat tidak ditemukan.</strong>
+            <br>
+            Nomor sertifikat tersebut tidak terdaftar.
+          </div>
+        `;
+
+        return;
+      }
+
+
+      result.innerHTML = `
+
+        <div class="status">
+          <span class="dot"></span>
+          Certificate record found
+        </div>
+
+        <h2>Sertifikat Terverifikasi</h2>
+
+        <dl class="details">
+
+          <div>
+            <dt>Nama</dt>
+            <dd>${certificate.name}</dd>
+          </div>
+
+          <div>
+            <dt>Program / Tes</dt>
+            <dd>${certificate.program}</dd>
+          </div>
+
+          <div>
+            <dt>Nomor Sertifikat</dt>
+            <dd>${certificate.certificateNumber}</dd>
+          </div>
+
+          <div>
+            <dt>Tanggal Tes</dt>
+            <dd>${certificate.testDate}</dd>
+          </div>
+
+          <div>
+            <dt>Berlaku Sampai</dt>
+            <dd>${certificate.validUntil}</dd>
+          </div>
+
+          <div>
+            <dt>Penerbit</dt>
+            <dd>${certificate.issuer}</dd>
+          </div>
+
+        </dl>
+
+
+        <div class="scores">
+
+          <div>
+            <span>Listening Comprehension</span>
+            <strong>${certificate.listening}</strong>
+          </div>
+
+          <div>
+            <span>Structure &amp; Written Expression</span>
+            <strong>${certificate.structure}</strong>
+          </div>
+
+          <div>
+            <span>Reading Comprehension</span>
+            <strong>${certificate.reading}</strong>
+          </div>
+
+          <div class="total">
+            <span>Total</span>
+            <strong>${certificate.total}</strong>
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <a
+            class="button primary"
+            href="${certificate.pdf}"
+            target="_blank"
+            rel="noopener"
+          >
+            Lihat Sertifikat PDF
+          </a>
+
+          <button
+            class="button secondary"
+            onclick="copyLink()"
+          >
+            Salin Link Verifikasi
+          </button>
+
+        </div>
+
+        <p id="copied" class="copied"></p>
+
+      `;
+
     }
+
+
+    function copyLink() {
+
+      navigator.clipboard
+        .writeText(window.location.href)
+        .then(() => {
+
+          const copied =
+            document.getElementById("copied");
+
+          if (copied) {
+            copied.textContent =
+              "Link berhasil disalin.";
+          }
+
+        });
+
+    }
+
   </script>
+
 </body>
 </html>
+```
