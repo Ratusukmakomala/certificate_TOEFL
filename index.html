@@ -1,973 +1,353 @@
-```html
 <!doctype html>
 <html lang="id">
-
 <head>
-
   <meta charset="utf-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Certificate Verification | English Domestic</title>
 
-  <meta
-    name="description"
-    content="Official online certificate verification - English Domestic"
-  >
-
   <style>
-
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      min-height: 100vh;
-
-      background:
-        linear-gradient(
-          135deg,
-          #071a35 0%,
-          #0b3b73 45%,
-          #087ea4 100%
-        );
-
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #071a33, #0b3b5c, #0b6b73);
       color: #172033;
-    }
-
-    .page {
       min-height: 100vh;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      padding: 35px 18px;
     }
 
     .container {
-      width: 100%;
-      max-width: 850px;
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
     }
-
-    /* HEADER */
 
     .header {
       text-align: center;
       color: white;
-
-      margin-bottom: 25px;
+      margin-bottom: 28px;
     }
 
-    .logo {
-      width: 70px;
-      height: 70px;
-
-      margin: 0 auto 15px;
-
-      border-radius: 50%;
-
-      background: rgba(255,255,255,.15);
-
-      border:
-        1px solid
-        rgba(255,255,255,.3);
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      font-size: 32px;
-
-      backdrop-filter: blur(10px);
-
-      box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.2);
-    }
-
-    .brand {
-      font-size: 13px;
-
-      font-weight: 700;
-
+    .header .brand {
+      font-size: 14px;
+      font-weight: bold;
       letter-spacing: 3px;
-
-      opacity: .85;
-
-      margin-bottom: 8px;
+      opacity: 0.9;
+      margin-bottom: 12px;
     }
 
     .header h1 {
-      font-size: 32px;
-
-      font-weight: 800;
-
-      margin-bottom: 8px;
+      margin: 0;
+      font-size: 36px;
     }
 
     .header p {
-      font-size: 15px;
-
-      opacity: .85;
-
-      line-height: 1.6;
+      margin-top: 10px;
+      opacity: 0.85;
     }
-
-    /* CARD */
 
     .card {
       background: white;
-
       border-radius: 22px;
-
       padding: 35px;
-
-      box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.25);
-
-      animation:
-        fadeUp .6s ease;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
     }
 
-    @keyframes fadeUp {
-
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
+    .verified {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    .search-title {
-      font-size: 18px;
-
-      font-weight: 700;
-
-      margin-bottom: 10px;
-    }
-
-    .search-description {
-      color: #667085;
-
-      font-size: 14px;
-
-      margin-bottom: 18px;
-    }
-
-    .search-box {
-      display: flex;
-
-      gap: 10px;
-
-      margin-bottom: 25px;
-    }
-
-    input {
-      flex: 1;
-
-      padding: 15px 17px;
-
-      border-radius: 12px;
-
-      border:
-        1px solid
-        #d0d5dd;
-
-      font-size: 16px;
-
-      outline: none;
-
-      transition: .2s;
-    }
-
-    input:focus {
-      border-color: #087ea4;
-
-      box-shadow:
-        0 0 0 4px
-        rgba(8,126,164,.12);
-    }
-
-    .button {
-      border: none;
-
-      cursor: pointer;
-
-      border-radius: 12px;
-
-      padding: 14px 20px;
-
-      font-size: 14px;
-
-      font-weight: 700;
-
-      text-decoration: none;
-
-      display: inline-flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      transition: .2s;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .primary {
-      background:
-        linear-gradient(
-          135deg,
-          #075985,
-          #087ea4
-        );
-
+    .verified-icon {
+      width: 65px;
+      height: 65px;
+      background: #16a34a;
       color: white;
-
-      box-shadow:
-        0 8px 20px
-        rgba(8,126,164,.25);
-    }
-
-    .secondary {
-      background: #eef6f8;
-
-      color: #075985;
-    }
-
-    /* STATUS */
-
-    .status {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      background: #ecfdf3;
-
-      color: #027a48;
-
-      padding: 8px 13px;
-
-      border-radius: 30px;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-      margin-bottom: 18px;
-    }
-
-    .dot {
-      width: 8px;
-
-      height: 8px;
-
       border-radius: 50%;
-
-      background: #12b76a;
-
-      box-shadow:
-        0 0 0 4px
-        rgba(18,183,106,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      font-size: 32px;
+      font-weight: bold;
     }
 
-    .verified-title {
-      font-size: 25px;
-
-      margin-bottom: 20px;
-
-      color: #101828;
+    .verified h2 {
+      margin: 15px 0 5px;
+      color: #166534;
     }
 
-    /* DETAILS */
+    .verified p {
+      margin: 0;
+      color: #64748b;
+    }
 
     .details {
-      border-top:
-        1px solid
-        #eaecf0;
-
-      border-bottom:
-        1px solid
-        #eaecf0;
-
-      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 25px;
     }
 
-    .details > div {
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 20px;
-
-      padding: 14px 0;
-
-      border-bottom:
-        1px solid
-        #f2f4f7;
+    .item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
     }
 
-    .details > div:last-child {
-      border-bottom: none;
+    .item .label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    dt {
-      color: #667085;
-
-      font-size: 14px;
+    .item .value {
+      font-size: 16px;
+      font-weight: bold;
+      color: #172033;
     }
-
-    dd {
-      font-weight: 700;
-
-      text-align: right;
-
-      font-size: 14px;
-
-      color: #101828;
-    }
-
-    /* SCORES */
 
     .scores {
+      margin-top: 25px;
+    }
+
+    .scores h3 {
+      margin-bottom: 14px;
+    }
+
+    .score-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-
-      margin-bottom: 20px;
     }
 
     .score {
-      background: #f8fafc;
-
-      border:
-        1px solid
-        #eaecf0;
-
-      border-radius: 14px;
-
-      padding: 17px;
-
       text-align: center;
+      background: #eff6ff;
+      border-radius: 12px;
+      padding: 18px 10px;
     }
 
-    .score span {
-      display: block;
-
-      color: #667085;
-
-      font-size: 12px;
-
-      line-height: 1.4;
-
-      margin-bottom: 7px;
-    }
-
-    .score strong {
-      font-size: 24px;
-
+    .score .number {
+      font-size: 26px;
+      font-weight: bold;
       color: #075985;
     }
 
-    .total {
-      grid-column:
-        1 / -1;
-
-      background:
-        linear-gradient(
-          135deg,
-          #071a35,
-          #087ea4
-        );
-
-      color: white;
-
-      border-radius: 16px;
-
-      padding: 20px;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
+    .score .name {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 5px;
     }
 
-    .total span {
+    .total {
+      margin-top: 18px;
+      text-align: center;
+      background: linear-gradient(135deg, #075985, #0f766e);
       color: white;
+      border-radius: 15px;
+      padding: 20px;
+    }
 
-      font-size: 15px;
-
-      font-weight: 700;
+    .total small {
+      display: block;
+      opacity: 0.85;
+      margin-bottom: 5px;
     }
 
     .total strong {
-      color: white;
-
-      font-size: 32px;
+      font-size: 38px;
     }
-
-    /* ACTIONS */
 
     .actions {
       display: flex;
-
-      gap: 10px;
-
-      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
     }
 
-    .actions .button {
+    .button {
       flex: 1;
-    }
-
-    .copied {
-      color: #027a48;
-
-      font-size: 13px;
-
-      margin-top: 12px;
-
       text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .error {
-      background: #fef3f2;
-
-      border:
-        1px solid
-        #fecdca;
-
-      color: #b42318;
-
-      padding: 15px;
-
-      border-radius: 12px;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-
-      margin-top: 15px;
+    .primary {
+      background: #075985;
+      color: white;
     }
 
-    /* FOOTER */
+    .secondary {
+      background: #e2e8f0;
+      color: #172033;
+    }
 
-    footer {
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .footer {
       text-align: center;
-
-      color: rgba(255,255,255,.75);
-
+      color: rgba(255,255,255,0.75);
       font-size: 13px;
-
       margin-top: 25px;
-
-      line-height: 1.7;
     }
-
-    /* MOBILE */
 
     @media (max-width: 650px) {
-
-      .page {
-        padding: 20px 12px;
+      .container {
+        padding: 25px 14px;
       }
 
       .header h1 {
-        font-size: 25px;
+        font-size: 28px;
       }
 
       .card {
-        padding: 23px 18px;
-
-        border-radius: 18px;
+        padding: 22px;
       }
 
-      .search-box {
-        flex-direction: column;
+      .details {
+        grid-template-columns: 1fr;
       }
 
-      .search-box .button {
-        width: 100%;
-      }
-
-      .scores {
-        grid-template-columns:
-          1fr;
-      }
-
-      .total {
-        grid-column: auto;
-      }
-
-      .details > div {
-        flex-direction: column;
-
-        gap: 5px;
-      }
-
-      dd {
-        text-align: left;
+      .score-grid {
+        grid-template-columns: 1fr;
       }
 
       .actions {
         flex-direction: column;
       }
-
-      .actions .button {
-        width: 100%;
-      }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-<div class="page">
-
   <div class="container">
 
-    <!-- HEADER -->
+    <div class="header">
+      <div class="brand">ENGLISH DOMESTIC</div>
+      <h1>Certificate Verification</h1>
+      <p>Official online certificate verification</p>
+    </div>
 
-    <header class="header">
+    <div class="card">
 
-      <div class="logo">
-        🎓
+      <div class="verified">
+        <div class="verified-icon">✓</div>
+        <h2>Certificate Verified</h2>
+        <p>This certificate has been successfully verified.</p>
       </div>
 
-      <div class="brand">
-        ENGLISH DOMESTIC
-      </div>
+      <div class="details">
 
-      <h1>
-        Certificate Verification
-      </h1>
+        <div class="item">
+          <div class="label">Name</div>
+          <div class="value">Ratu Sukmakomala</div>
+        </div>
 
-      <p>
-        Official online certificate verification
-      </p>
+        <div class="item">
+          <div class="label">Certificate Number</div>
+          <div class="value">251092753</div>
+        </div>
 
-    </header>
+        <div class="item">
+          <div class="label">Program / Test</div>
+          <div class="value">TOEFL Prediction Test</div>
+        </div>
 
+        <div class="item">
+          <div class="label">Test Date</div>
+          <div class="value">October 5, 2025</div>
+        </div>
 
-    <!-- MAIN CARD -->
+        <div class="item">
+          <div class="label">Valid Until</div>
+          <div class="value">October 5, 2027</div>
+        </div>
 
-    <section class="card">
-
-      <div class="search-title">
-        Verify Your Certificate
-      </div>
-
-      <p class="search-description">
-        Masukkan nomor sertifikat untuk memeriksa
-        keaslian dan data sertifikat yang diterbitkan.
-      </p>
-
-
-      <div class="search-box">
-
-        <input
-          id="certificateNumber"
-          type="text"
-          placeholder="Contoh: 251092753"
-          autocomplete="off"
-        >
-
-        <button
-          class="button primary"
-          onclick="verifyCertificate()"
-        >
-          🔍 Verifikasi
-        </button>
+        <div class="item">
+          <div class="label">Issuer</div>
+          <div class="value">English Domestic</div>
+        </div>
 
       </div>
-
-
-      <div id="result"></div>
-
-    </section>
-
-
-    <footer>
-
-      <div>
-        © 2026 English Domestic
-      </div>
-
-      <div>
-        Official Certificate Verification System
-      </div>
-
-    </footer>
-
-  </div>
-
-</div>
-
-
-<script>
-
-  const certificates = {
-
-    "251092753": {
-
-      name: "Ratu Sukmakomala",
-
-      program:
-        "TOEFL Prediction Test",
-
-      certificateNumber:
-        "251092753",
-
-      testDate:
-        "October 5, 2025",
-
-      validUntil:
-        "October 5, 2027",
-
-      issuer:
-        "English Domestic",
-
-      listening:
-        "48",
-
-      structure:
-        "65",
-
-      reading:
-        "61",
-
-      total:
-        "580",
-
-      pdf:
-        "certificates/251092753.pdf"
-
-    }
-
-  };
-
-
-  function verifyCertificate() {
-
-    const number =
-      document
-        .getElementById(
-          "certificateNumber"
-        )
-        .value
-        .trim();
-
-
-    const result =
-      document.getElementById(
-        "result"
-      );
-
-
-    if (!number) {
-
-      result.innerHTML = `
-
-        <div class="error">
-
-          Silakan masukkan
-          nomor sertifikat.
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    const certificate =
-      certificates[number];
-
-
-    if (!certificate) {
-
-      result.innerHTML = `
-
-        <div class="error">
-
-          <strong>
-            Sertifikat tidak ditemukan.
-          </strong>
-
-          <br>
-
-          Nomor sertifikat tersebut
-          tidak terdaftar dalam sistem.
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    result.innerHTML = `
-
-      <div class="status">
-
-        <span class="dot"></span>
-
-        Certificate Verified
-
-      </div>
-
-
-      <h2 class="verified-title">
-
-        Sertifikat Terverifikasi
-
-      </h2>
-
-
-      <dl class="details">
-
-        <div>
-
-          <dt>Nama</dt>
-
-          <dd>
-            ${certificate.name}
-          </dd>
-
-        </div>
-
-
-        <div>
-
-          <dt>Program / Tes</dt>
-
-          <dd>
-            ${certificate.program}
-          </dd>
-
-        </div>
-
-
-        <div>
-
-          <dt>Nomor Sertifikat</dt>
-
-          <dd>
-            ${certificate.certificateNumber}
-          </dd>
-
-        </div>
-
-
-        <div>
-
-          <dt>Tanggal Tes</dt>
-
-          <dd>
-            ${certificate.testDate}
-          </dd>
-
-        </div>
-
-
-        <div>
-
-          <dt>Berlaku Sampai</dt>
-
-          <dd>
-            ${certificate.validUntil}
-          </dd>
-
-        </div>
-
-
-        <div>
-
-          <dt>Penerbit</dt>
-
-          <dd>
-            ${certificate.issuer}
-          </dd>
-
-        </div>
-
-      </dl>
-
 
       <div class="scores">
 
+        <h3>TOEFL Score</h3>
 
-        <div class="score">
+        <div class="score-grid">
 
-          <span>
-            Listening Comprehension
-          </span>
+          <div class="score">
+            <div class="number">48</div>
+            <div class="name">Listening</div>
+          </div>
 
-          <strong>
-            ${certificate.listening}
-          </strong>
+          <div class="score">
+            <div class="number">65</div>
+            <div class="name">Structure & Written Expression</div>
+          </div>
 
-        </div>
-
-
-        <div class="score">
-
-          <span>
-            Structure &amp;
-            Written Expression
-          </span>
-
-          <strong>
-            ${certificate.structure}
-          </strong>
+          <div class="score">
+            <div class="number">61</div>
+            <div class="name">Reading</div>
+          </div>
 
         </div>
-
-
-        <div class="score">
-
-          <span>
-            Reading Comprehension
-          </span>
-
-          <strong>
-            ${certificate.reading}
-          </strong>
-
-        </div>
-
 
         <div class="total">
-
-          <span>
-            TOTAL SCORE
-          </span>
-
-          <strong>
-            ${certificate.total}
-          </strong>
-
+          <small>Total Score</small>
+          <strong>580</strong>
         </div>
-
 
       </div>
 
-
       <div class="actions">
-
 
         <a
           class="button primary"
-          href="${certificate.pdf}"
+          href="certificates/251092753.pdf"
           target="_blank"
-          rel="noopener"
         >
-          📄 Lihat Sertifikat PDF
+          View Certificate PDF
         </a>
-
 
         <button
           class="button secondary"
           onclick="copyLink()"
         >
-          🔗 Salin Link Verifikasi
+          Copy Verification Link
         </button>
-
 
       </div>
 
+    </div>
 
-      <p
-        id="copied"
-        class="copied"
-      ></p>
+    <div class="footer">
+      © 2025 English Domestic · Online Certificate Verification
+    </div>
 
-    `;
+  </div>
 
-  }
-
-
-  function copyLink() {
-
-    navigator.clipboard
-      .writeText(
-        window.location.href
-      )
-      .then(() => {
-
-        const copied =
-          document.getElementById(
-            "copied"
-          );
-
-        if (copied) {
-
-          copied.textContent =
-            "✓ Link berhasil disalin.";
-
-        }
-
+  <script>
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        alert("Verification link berhasil disalin.");
       });
-
-  }
-
-
-  document
-    .getElementById(
-      "certificateNumber"
-    )
-    .addEventListener(
-      "keydown",
-      function(event) {
-
-        if (
-          event.key === "Enter"
-        ) {
-
-          verifyCertificate();
-
-        }
-
-      }
-    );
-
-</script>
+    }
+  </script>
 
 </body>
 </html>
-```
